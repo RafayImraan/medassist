@@ -75,7 +75,7 @@ Feasibility notes:
 4. This tradeoff is practical for low-resource deployment contexts.
 
 Links (replace with final URLs):
-1. Repository: `https://github.com/<your-username>/<your-repo>`
-2. Colab notebook: `https://colab.research.google.com/github/<your-username>/<your-repo>/blob/main/colab/MedAssist_MedGemma_Colab_Ordered.ipynb`
+1. Repository: `https://github.com/RafayImraan/medassist.git`
+2. Colab notebook: `https://colab.research.google.com/drive/1wGww4_SMsTDXAiZIXc33kYEkYIuZIXJi?usp=sharing`
 3. Video demo: `[YouTube or Drive link]`
 4. Evaluation artifacts: `[Drive folder link]`
