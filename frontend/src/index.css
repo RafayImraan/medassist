@@ -1,0 +1,185 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-deep: #060e16;
+  --bg-mid: #0a1c2e;
+  --surface: #f9fbff;
+  --surface-soft: #f2f5fb;
+  --ink: #0d1b2a;
+  --muted: #4d5c73;
+  --gold: #c8a35d;
+  --gold-soft: #f1e2c4;
+  --line: #dde5f2;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(80rem 40rem at 15% -10%, #204d77 0%, transparent 65%),
+    radial-gradient(80rem 50rem at 100% 0%, #13304f 0%, transparent 68%),
+    linear-gradient(165deg, var(--bg-deep) 0%, var(--bg-mid) 45%, #081625 100%);
+  min-height: 100vh;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b58a3d #0b1b2b;
+}
+
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0b1b2b;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, #d4b476, #8f6d2f);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.22);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(220, 38, 38, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer components {
+  .lux-shell {
+    @apply relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 shadow-2xl backdrop-blur-xl;
+  }
+
+  .lux-panel {
+    @apply animate-[fade-up_.45s_ease] rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 shadow-[0_18px_40px_rgba(8,20,40,0.08)];
+  }
+
+  .enterprise-rail {
+    @apply sticky top-4 h-fit rounded-2xl border border-white/20 bg-[#081826]/80 p-4 shadow-lg backdrop-blur;
+  }
+
+  .rail-item {
+    @apply rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-left text-sm font-semibold text-slate-100 transition hover:bg-white/10;
+  }
+
+  .rail-action {
+    @apply rounded-lg border border-[#d5be8a] bg-[#d5be8a]/20 px-3 py-2 text-sm font-semibold text-[#f6e9cc] transition hover:bg-[#d5be8a]/30 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .kpi-card {
+    @apply rounded-xl border border-[color:var(--line)] bg-[color:var(--surface)] p-3 shadow-sm;
+  }
+
+  .status-banner {
+    @apply flex items-center gap-3 rounded-xl border border-[#d8c39a] bg-[#f8efe0] px-4 py-2 text-sm text-[#5f502f];
+  }
+
+  .status-dot {
+    @apply h-2.5 w-2.5 rounded-full bg-green-500;
+  }
+
+  .history-item {
+    @apply flex items-center justify-between rounded-lg border border-[color:var(--line)] bg-white px-3 py-2 text-left transition hover:bg-slate-50;
+  }
+
+  .audit-item {
+    @apply grid gap-1 rounded-lg border border-[color:var(--line)] bg-white px-3 py-2;
+  }
+
+  .glass-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.3) 48%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .9s ease;
+    pointer-events: none;
+  }
+
+  .glass-sheen:hover::after {
+    transform: translateX(140%);
+  }
+
+  .lux-label {
+    @apply text-xs font-semibold uppercase tracking-[0.16em] text-slate-500;
+  }
+
+  .lux-input {
+    @apply w-full rounded-xl border border-[color:var(--line)] bg-white px-3 py-2.5 text-sm text-slate-700 transition focus:border-[#b58a3d] focus:outline-none focus:ring-2 focus:ring-[#d6bb86]/30;
+  }
+
+  .metric-chip {
+    @apply rounded-full border border-[#e2d0aa] bg-[color:var(--gold-soft)] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#8f6d2f];
+  }
+
+  .timeline-list li {
+    @apply relative pl-5;
+  }
+
+  .timeline-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: #b58a3d;
+  }
+
+  .skeleton-line {
+    background: linear-gradient(90deg, #ecf1f8 20%, #ffffff 50%, #ecf1f8 80%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+    border-radius: 8px;
+  }
+}

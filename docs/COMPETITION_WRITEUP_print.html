@@ -1,0 +1,221 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>MedAssist Competition Write-up</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;margin:36px;color:#0f172a}
+pre{white-space:pre-wrap;word-break:break-word;line-height:1.35;font-size:12.5px}
+@page{size:A4;margin:20mm}
+</style>
+</head>
+<body><pre># MedAssist - Offline AI Clinical Triage Assistant
+## Competition Write-up (3-page format)
+
+### Project Summary
+MedAssist is an offline-ready, human-centered AI clinical triage and decision support application for low-resource healthcare environments. The system combines a production-structured full-stack application (React + FastAPI) with MedGemma (HAI-DEF) integration and a safety-first output pipeline designed for real-world deployment constraints.
+
+This tool is explicitly **not a diagnostic system**. It supports frontline clinical reasoning by structuring patient context, surfacing urgency, identifying red flags, and suggesting next steps while preserving clinician authority.
+
+---
+
+## 1. Problem Definition and User Need
+Many rural and low-resource clinics operate under one or more of the following constraints:
+1. Limited specialist access.
+2. Intermittent or low-bandwidth internet.
+3. Privacy and infrastructure barriers to cloud-only models.
+4. High cognitive load during triage with variable decision consistency.
+
+The target user for MedAssist is a frontline clinician or healthcare worker performing first-contact triage. The unmet need is not a replacement for physicians; it is a reliable clinical decision-support layer that improves consistency, prioritization, and communication quality.
+
+### Why AI is appropriate
+Triage requires rapid synthesis of multimodal patient context (symptoms, duration, vitals, history). This is a high-friction workflow where AI can add value by:
+1. Structuring reasoning quickly.
+2. Highlighting likely risk signals.
+3. Standardizing output format for handoff and escalation.
+4. Producing patient-friendly language for communication.
+
+---
+
+## 2. Effective Use of HAI-DEF Models
+MedAssist uses **MedGemma** from Google Health AI Developer Foundations (HAI-DEF) as its clinical reasoning engine. This directly satisfies the mandatory model-use requirement.
+
+### Why MedGemma
+1. Healthcare-oriented open model family.
+2. Flexible local/developer-controlled deployment pathways.
+3. Suitable for practical triage narrative generation and clinical summarization.
+
+### How MedGemma is used in this project
+1. Triage summary generation.
+2. Differential diagnosis hypothesis generation (top 3).
+3. Next-step recommendation generation.
+4. Optional patient-friendly explanation mode.
+
+### Engineering note
+In deployment-constrained contexts, model output formatting may degrade. MedAssist includes an explicit schema-hardening and safe-fallback layer, so safety-critical UI sections remain structured and operational even when raw generation quality drops.
+
+---
+
+## 3. Solution Architecture and Product Design
+### System architecture
+`User -&gt; React Frontend -&gt; FastAPI Backend -&gt; MedGemma Runtime -&gt; Structured Response -&gt; UI Rendering`
+
+### Stack
+1. Frontend: React (Vite), TailwindCSS.
+2. Backend: FastAPI, Pydantic schemas, structured logging, `.env` configuration.
+3. AI runtime paths:
+   1. Transformers path for MedGemma.
+   2. Optional GGUF path for constrained local environments.
+   3. Fallback mode for guaranteed local operability.
+4. Deployment: Dockerized local setup with reproducible instructions.
+
+### Product-level capabilities
+1. Structured patient intake form with clinically relevant fields.
+2. Urgency badge visualization (`LOW`, `MODERATE`, `HIGH`, `EMERGENCY`).
+3. Red-flag display and escalation guidance.
+4. Optional patient-friendly explanation mode (non-technical language).
+5. Enterprise workflow UI elements:
+   1. Command rail.
+   2. Case history queue.
+   3. Critical alerts panel.
+   4. Audit trail.
+   5. Printable report export.
+
+---
+
+## 4. Safety and Guardrails
+MedAssist implements safety-first behavior by design:
+1. Mandatory disclaimer in both UI and output payload.
+2. No medication dosage recommendation behavior.
+3. No definitive diagnosis claims.
+4. Required limitations section in every response.
+5. Structured output validation and fail-safe fallback when model output is non-compliant.
+
+This approach treats reliability and safe degradation as first-class requirements for low-resource healthcare environments.
+
+---
+
+## 5. Prompt Engineering Strategy
+The backend prompt strategy uses:
+1. A strict system prompt with explicit safety constraints.
+2. A structured patient context block with demographics, complaints, symptoms, vitals, and history.
+3. A strict JSON schema requirement to support deterministic downstream rendering.
+4. Optional patient-friendly explanation mode in the request schema.
+
+### Why this matters
+Prompting is optimized for production behavior, not only benchmark-style responses. The structure ensures output sections map directly to clinical workflow components in the UI.
+
+---
+
+## 6. Evaluation and Performance Analysis
+### Evaluation dataset
+10 simulated triage cases covering:
+1. Mild fever.
+2. Severe chest pain.
+3. Stroke-like symptoms.
+4. Abdominal pain.
+5. Headache.
+6. Dehydration.
+7. Shortness of breath.
+8. Pediatric fever.
+9. Elderly confusion.
+10. Trauma case.
+
+### Metrics used
+1. Urgency correctness.
+2. Red-flag detection hit-rate.
+3. Inference latency.
+4. JSON parse compliance rate.
+5. Fallback parse-rescue rate.
+
+### Latest Colab GPU (T4) run (raw model behavior snapshot)
+1. Total cases: `10`
+2. Urgency correctness: `3/10 (30.00%)`
+3. Red-flag detection hit-rate: `5/5 (100.00%)`
+4. Parsed directly as JSON: `0/10 (0.00%)`
+5. Fallback parse-rescue: `10/10 (100.00%)`
+6. Average inference time: `64.452s`
+
+### Current MedAssist backend evaluation (production output path with deterministic safety layer)
+1. Total cases: `10`
+2. Urgency correctness: `7/10 (70.00%)`
+3. Red-flag detection hit-rate: `5/5 (100.00%)`
+4. Average inference time (offline fallback path): `~0.0s`
+
+### Final submission metrics block (replace with your latest Colab rerun)
+Use this exact block in your final PDF after rerunning the Colab evaluation cell once:
+1. Total cases: `[x/10]`
+2. Urgency correctness: `[x/10 (%)]`
+3. Red-flag detection hit-rate: `[x/5 (%)]`
+4. Parsed directly as JSON: `[x/10 (%)]`
+5. Fallback parse-rescue: `[x/10 (%)]`
+6. Average inference time: `[xx.xxxs]`
+
+### Interpretation
+1. MedGemma runtime execution was achieved on GPU.
+2. Strict JSON adherence in raw generation was low.
+3. Production safety layers (parse-rescue + deterministic red-flag logic) materially improved clinical signal reliability in final outputs.
+
+This is an important practical finding: in healthcare decision support, operational reliability under imperfect generation conditions is essential.
+
+---
+
+## 7. Hardware Requirements and Deployment Feasibility
+### Recommended
+1. GPU with sufficient VRAM for quantized runtime.
+2. 16GB+ RAM.
+3. 20GB+ storage.
+
+### Real-world deployment feasibility
+MedAssist is designed with a dual-path strategy:
+1. Local/offline-capable app path for constrained environments.
+2. GPU-backed MedGemma proof path via Colab for reproducibility and model-use validation.
+
+This improves feasibility for teams that cannot maintain constant high-end inference infrastructure at the point of care.
+
+---
+
+## 8. Limitations
+1. The system is decision support, not diagnosis.
+2. Raw model generation can still show output-format reliability challenges under strict JSON constraints.
+3. Performance quality varies by runtime/hardware and generation stability.
+4. Evaluation data is simulated and does not replace prospective clinical validation.
+
+---
+
+## 9. Future Improvements
+1. Add constrained decoding / schema-native generation for stronger JSON compliance.
+2. Hybridize with deterministic triage rules for urgency and red-flag scoring.
+3. Expand clinician-reviewed evaluation with error taxonomy.
+4. Integrate multilingual patient communication support.
+5. Add protocol retrieval from local guidelines for context-grounded recommendations.
+
+---
+
+## 10. Impact Estimation
+If deployed successfully, expected impact includes:
+1. Increased triage consistency in low-resource clinics.
+2. Faster escalation visibility for high-risk cases.
+3. Better patient communication through plain-language summaries.
+4. Stronger privacy posture through local-first and flexible runtime paths.
+
+Impact estimation approach:
+1. Workflow-based assumptions (time-to-structured-output and escalation support).
+2. Simulated case analysis for early validation signals.
+3. Future plan for prospective pilot measurement in real clinic workflows.
+
+---
+
+## 11. Conclusion
+MedAssist demonstrates a full-stack, human-centered healthcare AI application that uses HAI-DEF MedGemma while prioritizing deployment realism, safety constraints, and operational continuity. The project contributes not only model integration, but resilient product behavior under real-world infrastructure limitations.
+
+---
+
+## Links (Replace with final URLs before submission)
+1. Source code repository: `https://github.com/&lt;your-username&gt;/&lt;your-repo&gt;`
+2. Colab notebook (ordered): `https://colab.research.google.com/github/&lt;your-username&gt;/&lt;your-repo&gt;/blob/main/colab/MedAssist_MedGemma_Colab_Ordered.ipynb`
+3. Colab run-output notebook artifact: `[Drive or Colab shared link for colab.ipynb]`
+4. Demo video (&lt;=3 minutes): `[YouTube or Drive link]`
+5. Evaluation artifact(s): `[Drive folder link with screenshots and output JSON]`
+</pre></body>
+</html>

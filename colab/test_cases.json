@@ -1,0 +1,222 @@
+﻿[
+  {
+    "id": "TC-01",
+    "name": "Mild fever",
+    "input": {
+      "age": 28,
+      "gender": "Female",
+      "chief_complaint": "Low-grade fever",
+      "symptoms": "Fever, sore throat, mild body aches",
+      "duration": "2 days",
+      "vitals": {
+        "temperature": 37.9,
+        "heart_rate": 92,
+        "blood_pressure": "112/72",
+        "respiratory_rate": 18,
+        "oxygen_saturation": 98
+      },
+      "medical_history": "None significant",
+      "medications": "Paracetamol occasionally"
+    },
+    "expected_urgency": "LOW",
+    "expected_red_flags": []
+  },
+  {
+    "id": "TC-02",
+    "name": "Severe chest pain",
+    "input": {
+      "age": 54,
+      "gender": "Male",
+      "chief_complaint": "Severe chest pain",
+      "symptoms": "Crushing central chest pain radiating to left arm, sweating",
+      "duration": "40 minutes",
+      "vitals": {
+        "temperature": 36.9,
+        "heart_rate": 118,
+        "blood_pressure": "160/95",
+        "respiratory_rate": 24,
+        "oxygen_saturation": 93
+      },
+      "medical_history": "Hypertension, smoker",
+      "medications": "Amlodipine"
+    },
+    "expected_urgency": "EMERGENCY",
+    "expected_red_flags": ["chest", "oxygen"]
+  },
+  {
+    "id": "TC-03",
+    "name": "Stroke-like symptoms",
+    "input": {
+      "age": 67,
+      "gender": "Female",
+      "chief_complaint": "Sudden weakness",
+      "symptoms": "Facial droop, slurred speech, right arm weakness",
+      "duration": "30 minutes",
+      "vitals": {
+        "temperature": 36.8,
+        "heart_rate": 96,
+        "blood_pressure": "175/100",
+        "respiratory_rate": 20,
+        "oxygen_saturation": 95
+      },
+      "medical_history": "Diabetes",
+      "medications": "Metformin"
+    },
+    "expected_urgency": "EMERGENCY",
+    "expected_red_flags": ["stroke", "speech", "droop"]
+  },
+  {
+    "id": "TC-04",
+    "name": "Abdominal pain",
+    "input": {
+      "age": 34,
+      "gender": "Male",
+      "chief_complaint": "Right lower abdominal pain",
+      "symptoms": "Nausea, pain worsens with movement",
+      "duration": "12 hours",
+      "vitals": {
+        "temperature": 38.3,
+        "heart_rate": 104,
+        "blood_pressure": "118/76",
+        "respiratory_rate": 20,
+        "oxygen_saturation": 98
+      },
+      "medical_history": "None",
+      "medications": "None"
+    },
+    "expected_urgency": "MODERATE",
+    "expected_red_flags": []
+  },
+  {
+    "id": "TC-05",
+    "name": "Headache",
+    "input": {
+      "age": 29,
+      "gender": "Female",
+      "chief_complaint": "Headache",
+      "symptoms": "Gradual throbbing headache, light sensitivity",
+      "duration": "1 day",
+      "vitals": {
+        "temperature": 36.7,
+        "heart_rate": 82,
+        "blood_pressure": "110/70",
+        "respiratory_rate": 16,
+        "oxygen_saturation": 99
+      },
+      "medical_history": "Migraine",
+      "medications": "None"
+    },
+    "expected_urgency": "LOW",
+    "expected_red_flags": []
+  },
+  {
+    "id": "TC-06",
+    "name": "Dehydration",
+    "input": {
+      "age": 41,
+      "gender": "Male",
+      "chief_complaint": "Weakness and dizziness",
+      "symptoms": "Vomiting, poor oral intake, dry mouth",
+      "duration": "2 days",
+      "vitals": {
+        "temperature": 37.4,
+        "heart_rate": 112,
+        "blood_pressure": "95/60",
+        "respiratory_rate": 22,
+        "oxygen_saturation": 97
+      },
+      "medical_history": "None",
+      "medications": "None"
+    },
+    "expected_urgency": "MODERATE",
+    "expected_red_flags": []
+  },
+  {
+    "id": "TC-07",
+    "name": "Shortness of breath",
+    "input": {
+      "age": 63,
+      "gender": "Male",
+      "chief_complaint": "Breathing difficulty",
+      "symptoms": "Shortness of breath at rest, cough",
+      "duration": "6 hours",
+      "vitals": {
+        "temperature": 38.1,
+        "heart_rate": 126,
+        "blood_pressure": "145/90",
+        "respiratory_rate": 32,
+        "oxygen_saturation": 88
+      },
+      "medical_history": "COPD",
+      "medications": "Inhalers"
+    },
+    "expected_urgency": "EMERGENCY",
+    "expected_red_flags": ["oxygen", "respiratory"]
+  },
+  {
+    "id": "TC-08",
+    "name": "Pediatric fever",
+    "input": {
+      "age": 4,
+      "gender": "Male",
+      "chief_complaint": "Fever",
+      "symptoms": "Fever, cough, reduced appetite",
+      "duration": "1 day",
+      "vitals": {
+        "temperature": 38.7,
+        "heart_rate": 130,
+        "blood_pressure": "95/60",
+        "respiratory_rate": 26,
+        "oxygen_saturation": 96
+      },
+      "medical_history": "No chronic illnesses",
+      "medications": "None"
+    },
+    "expected_urgency": "MODERATE",
+    "expected_red_flags": []
+  },
+  {
+    "id": "TC-09",
+    "name": "Elderly confusion",
+    "input": {
+      "age": 78,
+      "gender": "Female",
+      "chief_complaint": "Confusion",
+      "symptoms": "Acute confusion, reduced urine output",
+      "duration": "1 day",
+      "vitals": {
+        "temperature": 38.5,
+        "heart_rate": 108,
+        "blood_pressure": "100/62",
+        "respiratory_rate": 22,
+        "oxygen_saturation": 94
+      },
+      "medical_history": "Chronic kidney disease",
+      "medications": "Lisinopril"
+    },
+    "expected_urgency": "HIGH",
+    "expected_red_flags": ["confusion"]
+  },
+  {
+    "id": "TC-10",
+    "name": "Trauma case",
+    "input": {
+      "age": 31,
+      "gender": "Male",
+      "chief_complaint": "Road traffic injury",
+      "symptoms": "Leg pain, scalp laceration, dizziness",
+      "duration": "1 hour",
+      "vitals": {
+        "temperature": 36.5,
+        "heart_rate": 122,
+        "blood_pressure": "90/58",
+        "respiratory_rate": 24,
+        "oxygen_saturation": 95
+      },
+      "medical_history": "None",
+      "medications": "None"
+    },
+    "expected_urgency": "HIGH",
+    "expected_red_flags": ["trauma", "hypotension"]
+  }
+]

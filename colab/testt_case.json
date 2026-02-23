@@ -1,0 +1,24 @@
+[
+    {
+    "id": "TC-03",
+    "name": "Stroke-like symptoms",
+    "input": {
+      "age": 67,
+      "gender": "Female",
+      "chief_complaint": "Sudden weakness",
+      "symptoms": "Facial droop, slurred speech, right arm weakness",
+      "duration": "30 minutes",
+      "vitals": {
+        "temperature": 36.8,
+        "heart_rate": 96,
+        "blood_pressure": "175/100",
+        "respiratory_rate": 20,
+        "oxygen_saturation": 95
+      },
+      "medical_history": "Diabetes",
+      "medications": "Metformin"
+    },
+    "expected_urgency": "EMERGENCY",
+    "expected_red_flags": ["stroke", "speech", "droop"]
+  }
+]
