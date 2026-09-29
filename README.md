@@ -193,13 +193,6 @@ Metrics collected:
 - Urgency correctness (manual expected labels)
 - Red flag detection coverage
 
-## Architecture Diagram
-See `docs/TECHNICAL_DOCUMENTATION.md` for full architecture and technical details.
-
-## Submission Package
-- Competition write-up source: `docs/COMPETITION_WRITEUP.md`
-- Technical documentation: `docs/TECHNICAL_DOCUMENTATION.md`
-- Video plan: `docs/VIDEO_DEMO_PLAN.md`
 - Video voiceover script: `docs/VIDEO_SCRIPT.md`
 - Final checklist: `docs/SUBMISSION_CHECKLIST.md`
 
