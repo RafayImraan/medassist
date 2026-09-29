@@ -192,8 +192,3 @@ Metrics collected:
 - Inference time
 - Urgency correctness (manual expected labels)
 - Red flag detection coverage
-
-- Video voiceover script: `docs/VIDEO_SCRIPT.md`
-- Final checklist: `docs/SUBMISSION_CHECKLIST.md`
-
-Before final submit, convert `docs/COMPETITION_WRITEUP.md` to PDF (max 3 pages) and replace placeholder links in that file.
